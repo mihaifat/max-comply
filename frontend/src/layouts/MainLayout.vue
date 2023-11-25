@@ -55,7 +55,6 @@ import { createMaxComplyStore } from 'stores/store';
 const router = useRouter();
 const store = createMaxComplyStore();
 
-console.log(store.collection.value);
 store.getCollection('/tasks');
 
 
