@@ -1,5 +1,5 @@
 <template>
 	<q-page class="flex flex-center">
-		Index Page
+		Address Validation Page
 	</q-page>
 </template>

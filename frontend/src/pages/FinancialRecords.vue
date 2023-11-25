@@ -1,5 +1,5 @@
 <template>
 	<q-page class="flex flex-center">
-		Index Page
+		Financial Records Page
 	</q-page>
 </template>

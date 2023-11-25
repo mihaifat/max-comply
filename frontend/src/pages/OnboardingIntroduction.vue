@@ -1,5 +1,5 @@
 <template>
 	<q-page class="flex flex-center">
-		Index Page
+		Onboarding Introduction Page
 	</q-page>
 </template>
