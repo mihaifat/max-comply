@@ -20,19 +20,19 @@
 		</q-header>
 
 		<q-drawer
-			v-model="leftDrawerOpen"
 			show-if-above
 			bordered
 		>
 			<q-list>
 				<q-item-label header>
-					Essential Links
+					Search Bar
 				</q-item-label>
 
 				<essential-link
 					v-for="link in essentialLinks"
 					:key="link.title"
 					v-bind="link"
+					@click.capture="onLinkClick(link)"
 				/>
 			</q-list>
 		</q-drawer>
@@ -44,57 +44,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue';
 
+const router = useRouter();
 const essentialLinks = [
 	{
-		title: 'Docs',
-		caption: 'quasar.dev',
-		icon: 'school',
-		link: 'https://quasar.dev',
+		title: 'Onboarding Introduction',
+		caption: 'A brief introduction to the tasks required.',
+		link: '/onboarding-introduction',
 	},
 	{
-		title: 'Github',
-		caption: 'github.com/quasarframework',
-		icon: 'code',
-		link: 'https://github.com/quasarframework',
+		title: 'Identiy Validation',
+		caption: 'Provide valid photo identification',
+		link: '/identity-validation',
 	},
 	{
-		title: 'Discord Chat Channel',
-		caption: 'chat.quasar.dev',
-		icon: 'chat',
-		link: 'https://chat.quasar.dev',
+		title: 'Address Validation',
+		caption: 'Provide valid proof of address',
+		link: '/address-validation',
 	},
 	{
-		title: 'Forum',
-		caption: 'forum.quasar.dev',
-		icon: 'record_voice_over',
-		link: 'https://forum.quasar.dev',
-	},
-	{
-		title: 'Twitter',
-		caption: '@quasarframework',
-		icon: 'rss_feed',
-		link: 'https://twitter.quasar.dev',
-	},
-	{
-		title: 'Facebook',
-		caption: '@QuasarFramework',
-		icon: 'public',
-		link: 'https://facebook.quasar.dev',
-	},
-	{
-		title: 'Quasar Awesome',
-		caption: 'Community Quasar projects',
-		icon: 'favorite',
-		link: 'https://awesome.quasar.dev',
+		title: 'Financial Records',
+		caption: 'Provide details of financial transactions',
+		link: '/financial-records',
 	}
 ];
 
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer() {
-	leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+const onLinkClick = (link) => router.push(link.link);
 </script>
