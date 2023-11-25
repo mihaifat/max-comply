@@ -1,21 +1,10 @@
 <template>
-	<q-layout view="lHh Lpr lFf">
+	<q-layout view="hHh lpR fFf">
 		<q-header elevated>
 			<q-toolbar>
-				<q-btn
-					flat
-					dense
-					round
-					icon="menu"
-					aria-label="Menu"
-					@click="toggleLeftDrawer"
-				/>
-
 				<q-toolbar-title>
 					Quasar App
 				</q-toolbar-title>
-
-				<div>Quasar v{{ $q.version }}</div>
 			</q-toolbar>
 		</q-header>
 
@@ -29,6 +18,7 @@
 				</q-item-label>
 
 				<essential-link
+					class="cursor-pointer"
 					v-for="link in essentialLinks"
 					:key="link.title"
 					v-bind="link"
