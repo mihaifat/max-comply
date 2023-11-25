@@ -1,5 +1,7 @@
 <template>
-	<q-layout view="hHh lpR fFf">
+	<q-layout view="hHh lpR fFf"
+		v-if="!store.loading"
+	>
 		<q-header elevated>
 			<q-toolbar>
 				<q-toolbar-title>
@@ -19,10 +21,10 @@
 
 				<essential-link
 					class="cursor-pointer"
-					v-for="link in essentialLinks"
-					:key="link.title"
-					v-bind="link"
-					@click.capture="onLinkClick(link)"
+					v-for="item in store.collection"
+					:key="item.name"
+					v-bind="item"
+					@click.capture="onLinkClick(item)"
 				/>
 			</q-list>
 		</q-drawer>
@@ -31,35 +33,31 @@
 			<router-view />
 		</q-page-container>
 	</q-layout>
+
+	<div v-if="store.loading"
+		class="absolute-full flex justify-center items-center"
+	>
+		<q-circular-progress
+			indeterminate
+			rounded
+			size="100px"
+			color="primary"
+			class="q-ma-md"
+		/>
+	</div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue';
+import { createMaxComplyStore } from 'stores/store';
 
 const router = useRouter();
-const essentialLinks = [
-	{
-		title: 'Onboarding Introduction',
-		caption: 'A brief introduction to the tasks required.',
-		link: '/onboarding-introduction',
-	},
-	{
-		title: 'Identiy Validation',
-		caption: 'Provide valid photo identification',
-		link: '/identity-validation',
-	},
-	{
-		title: 'Address Validation',
-		caption: 'Provide valid proof of address',
-		link: '/address-validation',
-	},
-	{
-		title: 'Financial Records',
-		caption: 'Provide details of financial transactions',
-		link: '/financial-records',
-	}
-];
+const store = createMaxComplyStore();
+
+console.log(store.collection.value);
+store.getCollection('/tasks');
+
 
 const onLinkClick = (link) => router.push(link.link);
 </script>

@@ -6,7 +6,7 @@ export function BaseStorePlugin(context) {
 	// base state
 	const item = ref({}); // single item
 	const collection = ref([]); // array of items
-	const loading = ref(false); // loading status of current store
+	const loading = ref(true); // loading status of current store
 
 	// util
 	/**
@@ -41,10 +41,6 @@ export function BaseStorePlugin(context) {
 	 */
 	function handleApiSuccess(message) {
 		console.warn(message);
-		Notify.create({
-			type: 'positive',
-			message: message,
-		});
 	}
 
 	// actions
@@ -81,17 +77,12 @@ export function BaseStorePlugin(context) {
 		api.get(url)
 			.then(async (response) => {
 				await handleApiResponse(response);
-
-				collection.value = response.data;
-
-				console.log(response);
-
+				collection.value = response.data.data;
 				handleApiSuccess(`${context.store.$id}s retrieved successfully`);
+				loading.value = false;
 			})
 			.catch(() => {
 				handleApiError(`error getting ${context.store.$id}s`);
-			})
-			.finally(() => {
 				loading.value = false;
 			});
 	}

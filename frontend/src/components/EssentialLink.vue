@@ -1,9 +1,9 @@
 <template>
 	<q-item>
 		<q-item-section>
-			<q-item-label>{{ title }}</q-item-label>
+			<q-item-label>{{ name }}</q-item-label>
 			<q-item-label caption>
-				{{ caption }}
+				{{ subHeading }}
 			</q-item-label>
 		</q-item-section>
 
@@ -23,12 +23,12 @@
 
 <script setup>
 defineProps({
-	title: {
+	name: {
 		type: String,
 		required: true,
 	},
 
-	caption: {
+	subHeading: {
 		type: String,
 		default: '',
 	},
