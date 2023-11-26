@@ -133,9 +133,11 @@ const onFormSubmit = async () => {
 
 onMounted(async () => {
 	await store.getItem(`/tasks/${taskID}`);
-	formData.value = store.item.fields.reduce((formDataObject, field) => {
-		formDataObject[field.id] = undefined;
-		return formDataObject;
-	}, {});
+	formData.value = store.item.fields
+		.filter(field => field.type !== 'paragraph')
+		.reduce((formDataObject, field) => {
+			formDataObject[field.id] = undefined;
+			return formDataObject;
+		}, {});
 });
 </script>
