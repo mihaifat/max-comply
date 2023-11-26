@@ -98,7 +98,7 @@ export function BaseStorePlugin(context) {
 
 	function submitTask(url, data) {
 		submittingTask.value = true;
-		api.post(url, data)
+		return api.post(url, data)
 			.then(async (response) => {
 				await handleApiResponse(response);
 				submittingTask.value = false;

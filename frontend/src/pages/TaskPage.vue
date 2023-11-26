@@ -39,6 +39,7 @@
 							return !field.optional && inputLength >= min && inputLength <= max;
 						}
 					]"
+					:disable="!isFormEnabled"
 					type="text"
 				/>
 
@@ -49,6 +50,7 @@
 					stack-label
 					:label="field.label"
 					:value="field.value"
+					:disable="!isFormEnabled"
 					type="textarea"
 				/>
 
@@ -59,6 +61,7 @@
 					stack-label
 					:options="field.options"
 					:label="field.label"
+					:disable="!isFormEnabled"
 				/>
 
 				<q-file
@@ -67,6 +70,7 @@
 					stack-label
 					:accept="field.accept"
 					:label="field.label"
+					:disable="!isFormEnabled"
 					outlined
 				>
 					<template #prepend>
@@ -83,6 +87,7 @@
 					class="float-right"
 					type="submit"
 					color="primary"
+					:disable="!isFormEnabled"
 				>
 					<q-spinner
 						v-if="store.submittingTask"
@@ -118,10 +123,11 @@ const route = useRoute();
 const taskID = Number(route.params.id);
 
 const formData = ref({});
+const isFormEnabled = ref(true);
 
-const onFormSubmit = (event) => {
-	console.log(event);
-	store.submitTask(`/tasks/${store.item.id}`, formData.value);
+const onFormSubmit = async () => {
+	await store.submitTask(`/tasks/${store.item.id}`, formData.value);
+	isFormEnabled.value = false;
 };
 
 onMounted(async () => {
