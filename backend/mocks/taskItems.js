@@ -97,7 +97,7 @@ const TASK_ITEMS = [
 			{
 				id: '2-1',
 				type: 'inputText',
-				label: 'first name',
+				label: 'First Name',
 				optional: false,
 				validation: {
 					min: 3,
@@ -114,7 +114,7 @@ const TASK_ITEMS = [
 			{
 				id: '2-2',
 				type: 'inputText',
-				label: 'middle name',
+				label: 'Middle Name',
 				optional: false,
 				validation: {
 					min: 3,
@@ -131,7 +131,7 @@ const TASK_ITEMS = [
 			{
 				id: '2-3',
 				type: 'inputText',
-				label: 'surname',
+				label: 'Surname',
 				optional: false,
 				validation: {
 					min: 3,
@@ -148,7 +148,7 @@ const TASK_ITEMS = [
 			{
 				id: '2-4',
 				type: 'inputDocument',
-				label: 'identity document',
+				label: 'Identity Document',
 				optional: false,
 				validation: {
 					acceptType: 'image',
@@ -164,7 +164,7 @@ const TASK_ITEMS = [
 			{
 				id: '2-5',
 				type: 'inputDocument',
-				label: 'liveness photo',
+				label: 'Liveness Photo',
 				optional: false,
 				validation: {
 					acceptType: 'image',
@@ -212,7 +212,7 @@ const TASK_ITEMS = [
 			{
 				id: '3-1',
 				type: 'inputText',
-				label: 'address line 1',
+				label: 'Address Line 1',
 				optional: false,
 				validation: {
 					min: 3,
@@ -229,7 +229,7 @@ const TASK_ITEMS = [
 			{
 				id: '3-2',
 				type: 'inputText',
-				label: 'address line 2',
+				label: 'Address Line 2',
 				optional: false,
 				validation: {
 					min: 3,
@@ -246,7 +246,7 @@ const TASK_ITEMS = [
 			{
 				id: '3-3',
 				type: 'inputText',
-				label: 'address line 3',
+				label: 'Address Line 3',
 				optional: false,
 				validation: {
 					min: 3,
@@ -263,7 +263,7 @@ const TASK_ITEMS = [
 			{
 				id: '3-4',
 				type: 'inputText',
-				label: 'city',
+				label: 'City',
 				optional: false,
 				validation: {
 					min: 3,
@@ -280,7 +280,7 @@ const TASK_ITEMS = [
 			{
 				id: '3-5',
 				type: 'inputSelect',
-				label: 'country',
+				label: 'Country',
 				optional: false,
 				options: [
 					{
@@ -307,7 +307,7 @@ const TASK_ITEMS = [
 			{
 				id: '3-6',
 				type: 'inputDocument',
-				label: 'copy of bill with address',
+				label: 'Copy Of Bill With Address',
 				optional: false,
 				validation: {
 					acceptType: 'image',
@@ -355,7 +355,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-1',
 				type: 'inputText',
-				label: 'bank address line 1',
+				label: 'Bank Address Line 1',
 				optional: false,
 				validation: {
 					min: 3,
@@ -372,7 +372,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-2',
 				type: 'inputText',
-				label: 'bank address line 2',
+				label: 'Bank Address Line 2',
 				optional: false,
 				validation: {
 					min: 3,
@@ -389,7 +389,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-3',
 				type: 'inputText',
-				label: 'bank address line 3',
+				label: 'Bank Address Line 3',
 				optional: false,
 				validation: {
 					min: 3,
@@ -406,7 +406,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-4',
 				type: 'inputText',
-				label: 'bank city',
+				label: 'Bank City',
 				optional: false,
 				validation: {
 					min: 3,
@@ -423,7 +423,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-5',
 				type: 'inputSelect',
-				label: 'bank country',
+				label: 'Bank Country',
 				optional: false,
 				options: [
 					{
@@ -450,7 +450,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-6',
 				type: 'inputDocument',
-				label: 'copy of bill with address',
+				label: 'Copy Of Bill With Address',
 				optional: false,
 				validation: {
 					acceptType: 'pdf',
@@ -466,7 +466,7 @@ const TASK_ITEMS = [
 			{
 				id: '4-7',
 				type: 'inputTextArea',
-				label: 'additional information',
+				label: 'Additional Information',
 				optional: true,
 				size: {
 					lg: 12,

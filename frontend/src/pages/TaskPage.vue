@@ -25,6 +25,7 @@
 				<q-input
 					v-else-if="field.type === 'inputText'"
 					outlined
+					stack-label
 					:label="field.label"
 					:value="field.value"
 					:rules="[
