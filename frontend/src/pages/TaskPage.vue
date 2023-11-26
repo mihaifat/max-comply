@@ -33,7 +33,11 @@
 					:label="field.label"
 					:value="field.value"
 					:rules="[
-						value => !field.optional && value >= field.validation.min && value <= field.validation.max
+						value => {
+							const {min, max} = field.validation;
+							const inputLength = value.length;
+							return !field.optional && inputLength >= min && inputLength <= max;
+						}
 					]"
 					type="text"
 				/>
