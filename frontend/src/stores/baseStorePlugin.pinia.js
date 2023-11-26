@@ -95,13 +95,6 @@ export function BaseStorePlugin(context) {
 			});
 	}
 
-	async function initLoad(url) {
-		await getCollection(url);
-		const firstCollection = collection.value[0];
-		getItem(`/tasks/${firstCollection.id}`);
-	}
-
-
 	return {
 		// state
 		item,
@@ -109,7 +102,6 @@ export function BaseStorePlugin(context) {
 		loadingCollection,
 		loadingItem,
 		// actions
-		initLoad,
 		getItem,
 		getCollection,
 	};

@@ -93,5 +93,9 @@
 
 <script setup>
 import { useMaxComplyStore } from 'stores/store';
+import { useRoute } from 'vue-router';
 const store = useMaxComplyStore();
+const route = useRoute();
+const taskID = Number(route.params.id);
+store.getItem(`/tasks/${taskID}`);
 </script>

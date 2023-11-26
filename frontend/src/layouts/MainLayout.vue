@@ -69,11 +69,14 @@
 import TaskLink from 'components/TaskLink.vue';
 import { useMaxComplyStore } from 'stores/store';
 import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const store = useMaxComplyStore();
-store.initLoad('/tasks');
+store.getCollection('/tasks');
 
-const selectedIndex = ref(0);
+const route = useRoute();
+const taskID = Number(route.params.id) - 1;
+const selectedIndex = ref(taskID);
 const searchText = ref(null);
 
 const onLinkClick = (link, index) => {
