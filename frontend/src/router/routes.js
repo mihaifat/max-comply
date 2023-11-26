@@ -1,12 +1,9 @@
 const routes = [
 	{
 		path: '/',
+		redirect: '/task/1',
 		component: () => import('layouts/MainLayout.vue'),
 		children: [
-			{
-				path: '',
-				component: () => import('pages/IndexPage.vue'),
-			},
 			{
 				path: 'task/:id',
 				component: () => import('pages/TaskPage.vue'),

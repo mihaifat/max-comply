@@ -37,6 +37,7 @@
 				<q-input
 					v-else-if="field.type === 'inputTextArea'"
 					outlined
+					stack-label
 					:label="field.label"
 					:value="field.value"
 					type="textarea"
@@ -45,13 +46,16 @@
 				<q-select
 					v-else-if="field.type === 'inputSelect'"
 					outlined
+					stack-label
 					:options="field.options"
 					:label="field.label"
 				/>
 
 				<q-file
 					v-else-if="field.type === 'inputDocument'"
+					stack-label
 					:accept="field.accept"
+					:label="field.label"
 					outlined
 				>
 					<template #prepend>
