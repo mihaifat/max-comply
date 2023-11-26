@@ -25,6 +25,9 @@
 					v-else-if="field.type === 'inputText'"
 					:label="field.label"
 					:value="field.value"
+					:rules="[
+						value => !field.optional && value >= field.validation.min && value <= field.validation.max
+					]"
 					type="text"
 				/>
 
@@ -37,6 +40,7 @@
 
 				<q-select
 					v-else-if="field.type === 'inputSelect'"
+					:options="field.options"
 					:label="field.label"
 				/>
 
