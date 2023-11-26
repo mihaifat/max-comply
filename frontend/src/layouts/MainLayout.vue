@@ -23,6 +23,7 @@
 
 				<q-item>
 					<q-input
+						v-model="searchText"
 						outlined
 						type="search"
 						class="full-width"
@@ -34,7 +35,7 @@
 				</q-item>
 
 				<task-link
-					v-for="(item, index) in store.collection"
+					v-for="(item, index) in filteredCollection"
 					:key="item.name"
 					class="cursor-pointer"
 					:class="{ 'selected-item': selectedIndex === index }"
@@ -67,17 +68,29 @@
 <script setup>
 import TaskLink from 'components/TaskLink.vue';
 import { useMaxComplyStore } from 'stores/store';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const store = useMaxComplyStore();
 store.initLoad('/tasks');
 
 const selectedIndex = ref(0);
+const searchText = ref(null);
 
 const onLinkClick = (link, index) => {
 	selectedIndex.value = index;
 	store.getItem(`/tasks/${link.id}`);
 };
+
+const filteredCollection = computed(() => {
+	if (!searchText.value || searchText.value.length === 0) {
+		return store.collection;
+	}
+	return store.collection.filter(task => {
+		const normalizedTaskName = task.name.toLowerCase();
+		const normalizedSearchText = searchText.value.toLowerCase();
+		return normalizedTaskName.includes(normalizedSearchText);
+	});
+});
 </script>
 
 <style>
