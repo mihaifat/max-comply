@@ -1,5 +1,8 @@
 <template>
-	<q-form v-if="!store.loadingItem">
+	<q-form
+		v-if="!store.loadingItem"
+		@submit="onFormSubmit"
+	>
 		<div
 
 			class="row q-px-lg q-pt-xs q-col-gutter-md justify-between"
@@ -24,6 +27,7 @@
 
 				<q-input
 					v-else-if="field.type === 'inputText'"
+					v-model="formData[field.id]"
 					outlined
 					stack-label
 					:label="field.label"
@@ -36,6 +40,7 @@
 
 				<q-input
 					v-else-if="field.type === 'inputTextArea'"
+					v-model="formData[field.id]"
 					outlined
 					stack-label
 					:label="field.label"
@@ -45,6 +50,7 @@
 
 				<q-select
 					v-else-if="field.type === 'inputSelect'"
+					v-model="formData[field.id]"
 					outlined
 					stack-label
 					:options="field.options"
@@ -53,6 +59,7 @@
 
 				<q-file
 					v-else-if="field.type === 'inputDocument'"
+					v-model="formData[field.id]"
 					stack-label
 					:accept="field.accept"
 					:label="field.label"
@@ -70,10 +77,16 @@
 			>
 				<q-btn
 					class="float-right"
-					label="Submit"
 					type="submit"
 					color="primary"
-				/>
+				>
+					<q-spinner
+						v-if="store.submittingTask"
+						color="#FFFFFF"
+						size="1em"
+					/>
+					<span class="q-px-sx">SUBMIT</span>
+				</q-btn>
 			</div>
 		</div>
 	</q-form>
@@ -94,8 +107,24 @@
 <script setup>
 import { useMaxComplyStore } from 'stores/store';
 import { useRoute } from 'vue-router';
+import { onMounted, ref } from 'vue';
+
 const store = useMaxComplyStore();
 const route = useRoute();
 const taskID = Number(route.params.id);
-store.getItem(`/tasks/${taskID}`);
+
+const formData = ref({});
+
+const onFormSubmit = (event) => {
+	console.log(event);
+	store.submitTask(`/tasks/${store.item.id}`, formData.value);
+};
+
+onMounted(async () => {
+	await store.getItem(`/tasks/${taskID}`);
+	formData.value = store.item.fields.reduce((formDataObject, field) => {
+		formDataObject[field.id] = undefined;
+		return formDataObject;
+	}, {});
+});
 </script>

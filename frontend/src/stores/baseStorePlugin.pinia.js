@@ -8,6 +8,7 @@ export function BaseStorePlugin(context) {
 	const collection = ref([]); // array of items
 	const loadingCollection = ref(true); // loading status of current store
 	const loadingItem = ref(true); // loading status of current store
+	const submittingTask = ref(false); // loading status of current store
 
 	// util
 	/**
@@ -61,7 +62,7 @@ export function BaseStorePlugin(context) {
 	function getItem(url) {
 		loadingItem.value = true;
 
-		api.get(url)
+		return api.get(url)
 			.then(async (response) => {
 				await handleApiResponse(response);
 				addClassAttributeValueToEachField(response.data.data);
@@ -83,7 +84,7 @@ export function BaseStorePlugin(context) {
 	function getCollection(url) {
 		loadingCollection.value = true;
 
-		return api.get(url)
+		api.get(url)
 			.then(async (response) => {
 				await handleApiResponse(response);
 				collection.value = response.data.data;
@@ -95,14 +96,29 @@ export function BaseStorePlugin(context) {
 			});
 	}
 
+	function submitTask(url, data) {
+		submittingTask.value = true;
+		api.post(url, data)
+			.then(async (response) => {
+				await handleApiResponse(response);
+				submittingTask.value = false;
+			})
+			.catch(() => {
+				handleApiError(`error getting ${context.store.$id}s`);
+				submittingTask.value = false;
+			});
+	}
+
 	return {
 		// state
 		item,
 		collection,
 		loadingCollection,
 		loadingItem,
+		submittingTask,
 		// actions
 		getItem,
 		getCollection,
+		submitTask,
 	};
 }
