@@ -1,11 +1,12 @@
 <template>
-	<q-layout view="hHh lpR fFf"
+	<q-layout
 		v-if="!store.loadingCollection"
+		view="hHh lpR fFf"
 	>
 		<q-header elevated>
 			<q-toolbar>
 				<q-toolbar-title>
-					Quasar App
+					Max Comply
 				</q-toolbar-title>
 			</q-toolbar>
 		</q-header>
@@ -16,14 +17,24 @@
 			width="350"
 		>
 			<q-list>
-				<q-item-label header>
-					Search Bar
-				</q-item-label>
+				<q-item>
+					Task List
+				</q-item>
+
+				<q-item>
+					<q-input
+						type="search"
+					>
+						<template #append>
+							<q-icon name="search" />
+						</template>
+					</q-input>
+				</q-item>
 
 				<essential-link
-					class="cursor-pointer"
 					v-for="item in store.collection"
 					:key="item.name"
+					class="cursor-pointer"
 					v-bind="item"
 					:to="'/task/' + item.id"
 					@click.capture="onLinkClick(item)"
@@ -36,7 +47,8 @@
 		</q-page-container>
 	</q-layout>
 
-	<div v-if="store.loadingCollection"
+	<div
+		v-if="store.loadingCollection"
 		class="absolute-full flex justify-center items-center"
 	>
 		<q-circular-progress
