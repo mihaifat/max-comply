@@ -36,7 +36,8 @@
 						value => {
 							const {min, max} = field.validation;
 							const inputLength = value.length;
-							return !field.optional && inputLength >= min && inputLength <= max;
+							const message = 'Please enter ' + field.label;
+							return !field.optional && inputLength >= min && inputLength <= max || message;
 						}
 					]"
 					:disable="!isFormEnabled"
