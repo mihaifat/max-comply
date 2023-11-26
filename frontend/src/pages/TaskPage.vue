@@ -2,7 +2,7 @@
 	<q-form v-if="!store.loadingItem">
 		<div
 
-			class="row q-pl-lg q-pt-xs"
+			class="row q-px-lg q-pt-xs q-col-gutter-md justify-between"
 		>
 			<div class="col-12">
 				<p class="text-bold text-h5">
@@ -59,8 +59,12 @@
 				</q-file>
 			</div>
 
-			<div v-if="store.item.requiresSubmit">
+			<div
+				v-if="store.item.requiresSubmit"
+				class="col-12"
+			>
 				<q-btn
+					class="float-right"
 					label="Submit"
 					type="submit"
 					color="primary"
