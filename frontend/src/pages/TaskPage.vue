@@ -1,15 +1,16 @@
 <template>
-	<div
-		v-if="!store.loadingItem"
-		class="row"
-	>
-		<div class="col-12">
-			<p class="text-bold">
-				{{ store.item.name }}
-			</p>
-		</div>
+	<q-form v-if="!store.loadingItem">
+		<div
 
-		<q-form>
+			class="row q-pl-lg q-pt-xs"
+		>
+			<div class="col-12">
+				<p class="text-bold text-h5">
+					{{ store.item.name }}
+				</p>
+			</div>
+
+
 			<div
 				v-for="field in store.item.fields"
 				:key="field.id"
@@ -23,6 +24,7 @@
 
 				<q-input
 					v-else-if="field.type === 'inputText'"
+					outlined
 					:label="field.label"
 					:value="field.value"
 					:rules="[
@@ -33,6 +35,7 @@
 
 				<q-input
 					v-else-if="field.type === 'inputTextArea'"
+					outlined
 					:label="field.label"
 					:value="field.value"
 					type="textarea"
@@ -40,6 +43,7 @@
 
 				<q-select
 					v-else-if="field.type === 'inputSelect'"
+					outlined
 					:options="field.options"
 					:label="field.label"
 				/>
@@ -62,8 +66,8 @@
 					color="primary"
 				/>
 			</div>
-		</q-form>
-	</div>
+		</div>
+	</q-form>
 	<div
 		v-if="store.loadingItem"
 		class="absolute-full flex justify-center items-center"

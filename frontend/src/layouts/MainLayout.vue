@@ -14,16 +14,18 @@
 		<q-drawer
 			show-if-above
 			bordered
-			width="350"
+			:width="350"
 		>
 			<q-list>
-				<q-item>
+				<q-item class="text-bold text-h5">
 					Task List
 				</q-item>
 
 				<q-item>
 					<q-input
+						outlined
 						type="search"
+						class="full-width"
 					>
 						<template #append>
 							<q-icon name="search" />
@@ -31,13 +33,14 @@
 					</q-input>
 				</q-item>
 
-				<essential-link
-					v-for="item in store.collection"
+				<task-link
+					v-for="(item, index) in store.collection"
 					:key="item.name"
 					class="cursor-pointer"
+					:class="{ 'selected-item': selectedIndex === index }"
 					v-bind="item"
 					:to="'/task/' + item.id"
-					@click.capture="onLinkClick(item)"
+					@click.capture="onLinkClick(item, index)"
 				/>
 			</q-list>
 		</q-drawer>
@@ -62,12 +65,23 @@
 </template>
 
 <script setup>
-import EssentialLink from 'components/EssentialLink.vue';
+import TaskLink from 'components/TaskLink.vue';
 import { useMaxComplyStore } from 'stores/store';
+import { ref } from 'vue';
 
 const store = useMaxComplyStore();
-
 store.initLoad('/tasks');
 
-const onLinkClick = (link) => store.getItem(`/tasks/${link.id}`);
+const selectedIndex = ref(0);
+
+const onLinkClick = (link, index) => {
+	selectedIndex.value = index;
+	store.getItem(`/tasks/${link.id}`);
+};
 </script>
+
+<style>
+	.selected-item {
+	background-color: #DAF5FF;
+}
+</style>

@@ -8,18 +8,13 @@
 		</q-item-section>
 
 		<q-item-section avatar>
-			<q-icon name="arrow_forward_ios"
+			<q-icon
+				name="arrow_forward_ios"
 				class="gray-arrow"
 			/>
 		</q-item-section>
 	</q-item>
 </template>
-
-<style>
-	.gray-arrow {
-		color: #757575;
-	}
-</style>
 
 <script setup>
 defineProps({
@@ -35,3 +30,9 @@ defineProps({
 
 });
 </script>
+
+<style>
+	.gray-arrow {
+		color: #757575;
+	}
+</style>

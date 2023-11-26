@@ -36,14 +36,6 @@ export function BaseStorePlugin(context) {
 		});
 	}
 
-	/**
-	 * displays success notification
-	 * @param {String} message to display
-	 */
-	function handleApiSuccess(message) {
-		console.warn(message);
-	}
-
 	function convertAcceptType(acceptType) {
 		if (acceptType === 'pdf') {
 			return 'application/pdf';
@@ -75,7 +67,6 @@ export function BaseStorePlugin(context) {
 				addClassAttributeValueToEachField(response.data.data);
 				item.value = response.data.data;
 
-				handleApiSuccess(`${context.store.$id} retrieved successfully`);
 				loadingItem.value = false;
 			})
 			.catch((e) => {
@@ -96,7 +87,6 @@ export function BaseStorePlugin(context) {
 			.then(async (response) => {
 				await handleApiResponse(response);
 				collection.value = response.data.data;
-				handleApiSuccess(`${context.store.$id}s retrieved successfully`);
 				loadingCollection.value = false;
 			})
 			.catch(() => {
