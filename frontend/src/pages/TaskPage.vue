@@ -54,6 +54,14 @@
 					</template>
 				</q-file>
 			</div>
+
+			<div v-if="store.item.requiresSubmit">
+				<q-btn
+					label="Submit"
+					type="submit"
+					color="primary"
+				/>
+			</div>
 		</q-form>
 	</div>
 	<div
