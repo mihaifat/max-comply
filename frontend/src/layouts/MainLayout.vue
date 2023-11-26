@@ -1,6 +1,6 @@
 <template>
 	<q-layout view="hHh lpR fFf"
-		v-if="!store.loading"
+		v-if="!store.loadingCollection"
 	>
 		<q-header elevated>
 			<q-toolbar>
@@ -13,6 +13,7 @@
 		<q-drawer
 			show-if-above
 			bordered
+			width="350"
 		>
 			<q-list>
 				<q-item-label header>
@@ -24,6 +25,7 @@
 					v-for="item in store.collection"
 					:key="item.name"
 					v-bind="item"
+					:to="'/task/' + item.id"
 					@click.capture="onLinkClick(item)"
 				/>
 			</q-list>
@@ -34,7 +36,7 @@
 		</q-page-container>
 	</q-layout>
 
-	<div v-if="store.loading"
+	<div v-if="store.loadingCollection"
 		class="absolute-full flex justify-center items-center"
 	>
 		<q-circular-progress
@@ -48,15 +50,12 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
 import EssentialLink from 'components/EssentialLink.vue';
-import { createMaxComplyStore } from 'stores/store';
+import { useMaxComplyStore } from 'stores/store';
 
-const router = useRouter();
-const store = createMaxComplyStore();
+const store = useMaxComplyStore();
 
-store.getCollection('/tasks');
+store.initLoad('/tasks');
 
-
-const onLinkClick = (link) => router.push(link.link);
+const onLinkClick = (link) => store.getItem(`/tasks/${link.id}`);
 </script>

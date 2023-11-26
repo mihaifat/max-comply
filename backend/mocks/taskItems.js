@@ -3,6 +3,7 @@ const TASK_ITEMS = [
 		id: 1,
 		name: 'Onboarding Introduction',
 		subHeading: 'A brief introduction to the tasks required.',
+		link: '/onboarding-introduction',
 		requiresSubmit: false,
 		status: 'completed',
 		fields: [
@@ -67,6 +68,7 @@ const TASK_ITEMS = [
 		id: 2,
 		name: 'Identity Validation',
 		subHeading: 'Provide valid photo identification',
+		link: '/identity-validation',
 		requiresSubmit: true,
 		status: 'open',
 		fields: [
@@ -181,6 +183,7 @@ const TASK_ITEMS = [
 		id: 3,
 		name: 'Address Validation',
 		subHeading: 'Provide valid proof of address',
+		link: '/address-validation',
 		requiresSubmit: true,
 		status: 'open',
 		fields: [
@@ -323,6 +326,7 @@ const TASK_ITEMS = [
 		id: 4,
 		name: 'Financial Records',
 		subHeading: 'Provide details of financial transactions',
+		link: '/financial-records',
 		requiresSubmit: true,
 		status: 'open',
 		fields: [

@@ -6,7 +6,8 @@ export function BaseStorePlugin(context) {
 	// base state
 	const item = ref({}); // single item
 	const collection = ref([]); // array of items
-	const loading = ref(true); // loading status of current store
+	const loadingCollection = ref(true); // loading status of current store
+	const loadingItem = ref(true); // loading status of current store
 
 	// util
 	/**
@@ -43,27 +44,44 @@ export function BaseStorePlugin(context) {
 		console.warn(message);
 	}
 
+	function convertAcceptType(acceptType) {
+		if (acceptType === 'pdf') {
+			return 'application/pdf';
+		} else if (acceptType === 'image') {
+			return 'image/*';
+		}
+		throw new Error('Could not convert acceptType: ' + acceptType);
+	}
+
+	function addClassAttributeValueToEachField(item) {
+		item.fields.forEach((field) => {
+			field.class = 'col-xs-' + field.size.xs + ' col-sm-' + field.size.sm + ' col-md-' + field.size.md + ' col-lg-' + field.size.lg;
+		});
+		item.fields.filter((field) => field.validation && field.validation.acceptType)
+			.forEach((field) => field.accept = convertAcceptType(field.validation.acceptType));
+	}
+
 	// actions
 	/**
 	 * calls GET function and assigns response to item value
 	 * @param {String} url API endpoint
 	 */
 	function getItem(url) {
-		loading.value = true;
+		loadingItem.value = true;
 
 		api.get(url)
 			.then(async (response) => {
 				await handleApiResponse(response);
-
-				item.value = response.data;
+				addClassAttributeValueToEachField(response.data.data);
+				item.value = response.data.data;
 
 				handleApiSuccess(`${context.store.$id} retrieved successfully`);
+				loadingItem.value = false;
 			})
-			.catch(() => {
+			.catch((e) => {
+				console.log(e);
 				handleApiError(`error getting ${context.store.$id}`);
-			})
-			.finally(() => {
-				loading.value = false;
+				loadingItem.value = false;
 			});
 	}
 
@@ -72,19 +90,25 @@ export function BaseStorePlugin(context) {
 	 * @param {String} url API endpoint
 	 */
 	function getCollection(url) {
-		loading.value = true;
+		loadingCollection.value = true;
 
-		api.get(url)
+		return api.get(url)
 			.then(async (response) => {
 				await handleApiResponse(response);
 				collection.value = response.data.data;
 				handleApiSuccess(`${context.store.$id}s retrieved successfully`);
-				loading.value = false;
+				loadingCollection.value = false;
 			})
 			.catch(() => {
 				handleApiError(`error getting ${context.store.$id}s`);
-				loading.value = false;
+				loadingCollection.value = false;
 			});
+	}
+
+	async function initLoad(url) {
+		await getCollection(url);
+		const firstCollection = collection.value[0];
+		getItem(`/tasks/${firstCollection.id}`);
 	}
 
 
@@ -92,9 +116,10 @@ export function BaseStorePlugin(context) {
 		// state
 		item,
 		collection,
-		loading,
-
+		loadingCollection,
+		loadingItem,
 		// actions
+		initLoad,
 		getItem,
 		getCollection,
 	};

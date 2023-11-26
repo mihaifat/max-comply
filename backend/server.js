@@ -12,7 +12,7 @@ server.set('port', (process.eventNames.PORT || port));
 
 //Define app routes
 server.get('/tasks', function (request, response) {
-	let data = {
+	const data = {
 		status: true,
 		data: TASKS_COLLECTION
 	};
@@ -23,8 +23,8 @@ server.get('/tasks', function (request, response) {
 });
 
 server.get('/tasks/:id', function (request, response) {
-	let task = TASK_ITEMS.filter(item => item.id.toString() === request.params.id);
-	let data = {
+	const task = TASK_ITEMS.find(item => item.id.toString() === request.params.id);
+	const data = {
 		status: true,
 		data: task
 	};
@@ -35,7 +35,7 @@ server.get('/tasks/:id', function (request, response) {
 });
 
 server.post('/tasks/:id', function (request, response) {
-	let data = {
+	const data = {
 		status: true,
 		message: 'Task submitted correctly',
 	};
