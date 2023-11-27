@@ -5,6 +5,14 @@
 	>
 		<q-header elevated>
 			<q-toolbar>
+				<q-btn
+					flat
+					round
+					dense
+					icon="menu"
+					class="lt-md"
+					@click="drawer.toggle()"
+				/>
 				<q-toolbar-title>
 					Max Comply
 				</q-toolbar-title>
@@ -12,6 +20,7 @@
 		</q-header>
 
 		<q-drawer
+			ref="drawer"
 			show-if-above
 			bordered
 			:width="350"
@@ -76,8 +85,10 @@ store.getCollection('/tasks');
 
 const route = useRoute();
 const taskID = Number(route.params.id) - 1;
+
 const selectedIndex = ref(taskID);
 const searchText = ref(null);
+const drawer = ref(null);
 
 const onLinkClick = (link, index) => {
 	selectedIndex.value = index;

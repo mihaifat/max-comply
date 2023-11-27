@@ -121,7 +121,7 @@ import { onMounted, ref } from 'vue';
 
 const store = useMaxComplyStore();
 const route = useRoute();
-const taskID = Number(route.params.id);
+const taskID = route.params.id;
 
 const formData = ref({});
 const isFormEnabled = ref(true);
