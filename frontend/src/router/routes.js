@@ -1,3 +1,8 @@
+// Checks if the path parameter id is between 1 and 4
+function isValidID(id) {
+	return /^[1-4]$/.test(id);
+}
+
 const routes = [
 	{
 		path: '/',
@@ -7,6 +12,16 @@ const routes = [
 			{
 				path: 'task/:id',
 				component: () => import('pages/TaskPage.vue'),
+				beforeEnter: (to, from, next) => { // Route guard to check if it's permitted navigating to /task with the given id path parameter
+					const {
+						id,
+					} = to.params;
+					if (isValidID(id)) {
+						next();
+					} else {
+						next('/:catchAll(.*)*');
+					}
+				},
 			}
 		],
 	},
